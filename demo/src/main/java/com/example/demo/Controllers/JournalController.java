@@ -14,22 +14,22 @@ public class JournalController {
     private JournalRepository journalRepository;
 
     @PostMapping(path = "/add")
-    public String createJournal(@RequestBody Journal journal){
+    public Integer createJournal(@RequestBody Journal journal){
         return journalRepository.save(journal).getId();
     }
 
-    @GetMapping(path = "/all")
-    public Iterable<Journal> getAllJournal(@RequestBody User user){
-        return (Iterable<Journal>) journalRepository.findAllByUser_id(user.getId());
+    @GetMapping(path = "/all/{id}")
+    public Iterable<Journal> getAllJournal(@PathVariable("id") String user){
+        return journalRepository.findByUserID(user);
     }
 
     @PutMapping(path = "/update")
-    public String updateJournal(@RequestBody Journal journal){
+    public Integer updateJournal(@RequestBody Journal journal){
         return journalRepository.save(journal).getId();
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public String deleteJournal(@PathVariable String id){
+    public String deleteJournal(@PathVariable Integer id){
         journalRepository.deleteById(id);
         return "Journal Deleted";
     }

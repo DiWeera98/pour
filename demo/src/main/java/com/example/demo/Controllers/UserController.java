@@ -17,13 +17,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(path="/authenticate")
-    public String authenticate(@RequestBody User user){
+    public Integer authenticate(@RequestBody User user){
         User user1 = userRepository.findByEmail(user.getEmail());
         if (user1==null){
-            return "Invalid user";
+            return -1;
         }
-        if (user1.getPassword()!=user.getPassword()){
-            return "Invalid password";
+        if (!user1.getPassword().equals(user.getPassword())){
+            return 0;
         }
         return user1.getId();
     }

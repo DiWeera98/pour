@@ -14,12 +14,12 @@ public class EntryController {
     private EntryRepository entryRepository;
 
     @PostMapping(path = "/add")
-    public String createEntry(@RequestBody Entry entry){
+    public Integer createEntry(@RequestBody Entry entry){
         return entryRepository.save(entry).getId();
     }
 
-    @GetMapping(path = "/all")
-    public Iterable<Entry> getAllEntries(@RequestBody Journal journal){
-        return (Iterable<Entry>) entryRepository.findAllByJournal_id(journal.getId());
+    @GetMapping(path = "/all/{id}")
+    public Iterable<Entry> getAllEntries(@PathVariable("id") Integer journal){
+        return (Iterable<Entry>) entryRepository.findByJournalId(journal);
     }
 }

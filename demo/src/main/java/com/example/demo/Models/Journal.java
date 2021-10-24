@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -11,42 +13,41 @@ public class Journal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String Id;
+    private Integer Id;
 
-    private String user_id;
-    private String Name;
-    private Date created;
+    private String userid;
+    private String name;
+    private LocalDate created;
 
-
-    public String getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public Date getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setCreated() {
+        this.created = LocalDate.now(ZoneId.of("GMT+05:30"));
     }
 }
